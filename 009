@@ -1,0 +1,27 @@
+Razavi Microelectronics : Example #3.4
+
+**********************************************************
+* Models
+**********************************************************
+
+* This is an ideal switch model diode
+* DO NOT USE IT FOR APPLICATIONS INVOLVING REVERSE BIAS
+.model ideal_diode sw vt=0 vh=0.001 ron=10e-9 roff=10e9
+
+**********************************************************
+* Netlist
+**********************************************************
+
+s1 1 2 1 2 ideal_diode
+vsource 1 0 5
+vprobe 	2 3 0
+rload	3 0 1
+
+**********************************************************
+* Simulation
+**********************************************************
+
+.control
+dc vsource -1 1 0.001
+plot i(vprobe) ylimit 0 1  
+.endc

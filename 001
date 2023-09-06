@@ -1,0 +1,31 @@
+Razavi Microelectronics : Diode Characterization
+
+**********************************************************
+* Models
+**********************************************************
+
+* Diode model with Is = 5E-16 A
+.MODEL diode D(IS=5E-16)
+
+** This is a Schottky Diode from a previous project
+** SRC=1N5711WS;DI_1N5711WS;Diodes;Si;  70.0V  15.0mA  1.00ns   Diodes Inc. 
+*.MODEL DI_1N5711WS D  ( IS=315n RS=2.80 BV=70.0 IBV=10.0u
+*+ CJO=2.00p  M=0.333 N=2.03 TT=1.44n )
+
+**********************************************************
+* Netlist
+**********************************************************
+
+d1 1 2 diode
+vsource 1 0 5
+vprobe 	2 0 0
+
+**********************************************************
+* Simulation
+**********************************************************
+
+.control
+dc vsource 0 1 0.001
+plot i(vprobe) ylimit 1e-9 1e0 ylog
+plot i(vprobe) 
+.endc
